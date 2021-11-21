@@ -1,0 +1,19 @@
+{
+  "name": "devcamper_api",
+  "version": "1.0.0",
+  "description": "Devcamper Backend API by Brad Traversy",
+  "main": "server.js",
+  "scripts": {
+    "start": "SET NODE_ENV=production & nodemon server",
+    "dev": "nodemon server"
+  },
+  "author": "Anubhav Bagri",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
