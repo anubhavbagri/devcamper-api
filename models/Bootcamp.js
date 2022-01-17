@@ -29,4 +29,90 @@ name: String
       'Please use a valid URL with HTTP or HTTPS',
     ],
   },
+  phone: {
+    type: String,
+    maxlength: [20, 'Phone number can not be longer than 20 characters'],
+  },
+  email: {
+    type: String,
+    match: [
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+      'Please add a valid email',
+    ],
+  },
+  // address will be sent from the server to the client
+  address: {
+    type: String,
+    required: [true, 'Please add an address'],
+  },
+  location: {
+    // GeoJSON Point : https://mongoosejs.com/docs/geojson.html
+    type: {
+      type: String,
+      enum: ['Point'],
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+      index: '2dsphere',
+    },
+    formattedAddress: String,
+    street: String,
+    city: String,
+    state: String,
+    zipcode: String,
+    country: String,
+  },
+  careers: {
+    // Array of string
+    type: [String],
+    required: true,
+    // only available values that careers can have
+    enum: [
+      'Web Development',
+      'Mobile Development',
+      'UI/UX',
+      'Data Science',
+      'Business',
+      'Other',
+    ],
+  },
+  // averageRating isn't going to get inserted with a request; its going to be generated.
+  averageRating: {
+    type: Number,
+    min: [1, 'Rating must be at least 1'],
+    max: [10, 'Rating must not be more than 10'],
+  },
+  averageCost: Number,
+  photo: {
+    type: String,
+    default: 'no-photo.jpg', //when you have your frontend, just put this jpg file in your folder
+  },
+  housing: {
+    type: Boolean,
+    default: false,
+  },
+  jobAssistance: {
+    type: Boolean,
+    default: false,
+  },
+  jobGuarantee: {
+    type: Boolean,
+    default: false,
+  },
+  acceptGi: {
+    type: Boolean,
+    default: false,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  /*
+  Later on, we're going to have a user field because we need a user associated with the boot camp.
+  So, we know who added which bootcamp, but we don't have user functionality, authentication or anything yet so not going to add it now.
+  */
 });
+
+module.exports = mongoose.model('Bootcamp', BootcampSchema);
