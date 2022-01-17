@@ -8,12 +8,6 @@ dotenv.config({ path: './config/config.env' });
 
 // Connect to database
 connectDB();
-// .then((data) => {
-//   console.log(data);
-// })
-// .catch((err) => {
-//   console.log(err);
-// });
 
 // Route files
 const bootcamps = require('./routes/bootcamps');
