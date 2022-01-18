@@ -1,6 +1,6 @@
 // to create a schema of fields
 const mongoose = require('mongoose');
-
+const slugify = require('slugify');
 const BootcampSchema = new mongoose.Schema({
   // it takes all the fields along with validation, etc
   /*
@@ -50,11 +50,9 @@ name: String
     type: {
       type: String,
       enum: ['Point'],
-      // required: true,
     },
     coordinates: {
       type: [Number],
-      // required: true,
       index: '2dsphere',
     },
     formattedAddress: String,
@@ -113,6 +111,15 @@ name: String
   Later on, we're going to have a user field because we need a user associated with the boot camp.
   So, we know who added which bootcamp, but we don't have user functionality, authentication or anything yet so not going to add it now.
   */
+});
+
+// Create bootcamp slug from the name
+// pre is going to run before the document is saved.
+// Use normal function here; Arrow function handle scope different, they handle the 'this' keyword differently.
+BootcampSchema.pre('save', function (next) {
+  // console.log('Slugify ran', this.name);
+  this.slug = slugify(this.name, { lower: true });
+  next(); // so it knows to move on to the next piece of middleware
 });
 
 module.exports = mongoose.model('Bootcamp', BootcampSchema);
