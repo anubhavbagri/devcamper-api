@@ -1,5 +1,5 @@
 const errorHandler = (err, req, res, next) => {
-  // Log to console for dev
+  // Log error to console for the developer
   console.log(err.stack.red);
 
   res.status(500).json({
