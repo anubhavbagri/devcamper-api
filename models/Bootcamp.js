@@ -110,10 +110,12 @@ name: String
       type: Date,
       default: Date.now,
     },
-    /*
-  Later on, we're going to have a user field because we need a user associated with the boot camp.
-  So, we know who added which bootcamp, but we don't have user functionality, authentication or anything yet so not going to add it now.
-  */
+    // User is now associated with a bootcamp
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: true,
+    },
   },
   {
     toJSON: { virtuals: true },
